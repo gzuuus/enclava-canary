@@ -33,27 +33,33 @@ python3 server.py   # serves http://localhost:8080 (no sidecar → attestation c
 
 ## Build, sign, deploy
 
-The intended journey is **cosign keyless** (Fulcio); enclava verifies against the
-public Sigstore trust root, with the signer pinned per-app at `create` time.
+A GitHub Actions workflow (`.github/workflows/build-sign.yml`) builds, pushes to
+GHCR, and **signs keyless** on every push to `main` (or via `workflow_dispatch`).
+It uses the built-in `GITHUB_TOKEN` (no PAT) and GitHub OIDC for cosign (no manual
+IdP login). The job summary prints the image digest + the exact signer subject.
 
-```bash
-# 1. build + push to GHCR
-docker login ghcr.io -u <gh-user> -p <PAT-with-write:packages>
-docker build -t ghcr.io/<gh-user>/enclava-canary:latest .
-docker push ghcr.io/<gh-user>/enclava-canary:latest      # note the sha256 digest in the output
+enclava verifies the signature against the **public Sigstore** trust root, with
+the signer pinned per-app at `create` time (issuer defaults to GitHub Actions'
+`https://token.actions.githubusercontent.com`).
 
-# 2. sign keyless (interactive IdP login → Fulcio; observe the identity email + issuer it uses)
-cosign sign --yes ghcr.io/<gh-user>/enclava-canary@sha256:<digest>
-
-# 3. create the app, pinning that signer identity
-enclava create \
-  --image ghcr.io/<gh-user>/enclava-canary:latest \
-  --signer-subject <signer-email> \
-  --signer-issuer <issuer>   # e.g. https://accounts.google.com ; omit if GitHub-Actions default
-
-# 4. deploy (auto-unlock = cleanest autonomous green)
-enclava deploy --image ghcr.io/<gh-user>/enclava-canary@sha256:<digest>
-```
+1. Push to `main` → CI builds + signs. Grab the **digest** (`sha256:…`) from the
+   Actions run summary.
+2. Flip the GHCR package to **public** so the cluster can pull without credentials
+   (GitHub → Packages → `enclava-canary` → Package settings → Change visibility).
+3. Verify the signature locally (confirms the exact subject to pin):
+   ```bash
+   cosign verify \
+     --certificate-identity https://github.com/gzuuus/enclava-canary/.github/workflows/build-sign.yml@refs/heads/main \
+     --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+     ghcr.io/gzuuus/enclava-canary@sha256:<digest> && echo "signature verified ✅"
+   ```
+4. Create + deploy (auto-unlock = cleanest autonomous green):
+   ```bash
+   enclava create \
+     --image ghcr.io/gzuuus/enclava-canary:latest \
+     --signer-subject https://github.com/gzuuus/enclava-canary/.github/workflows/build-sign.yml@refs/heads/main
+   enclava deploy --image ghcr.io/gzuuus/enclava-canary@sha256:<digest>
+   ```
 
 A password-mode deploy (instead of step 4) additionally surfaces `/status` →
 `claims_verified` and the ownership identity in the page, and exercises the

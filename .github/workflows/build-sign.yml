@@ -1,0 +1,68 @@
+name: build-sign
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+# GITHUB_TOKEN pushes to GHCR; id-token lets cosign sign keyless via GitHub OIDC.
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}
+
+jobs:
+  build-sign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:latest
+            ${{ env.IMAGE }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v3
+
+      - name: Sign image (keyless — GitHub OIDC → Fulcio)
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: cosign sign --yes "${{ env.IMAGE }}@${DIGEST}"
+
+      - name: Job summary
+        run: |
+          {
+            echo "### Built & signed :lock:"
+            echo ""
+            echo "**Image:** \`${{ env.IMAGE }}@${{ steps.build.outputs.digest }}\`"
+            echo ""
+            echo "Sign in enclava (issuer defaults to GitHub Actions):"
+            echo '```bash'
+            echo "enclava create --image ${{ env.IMAGE }}:latest \\"
+            echo "  --signer-subject https://github.com/${{ github.repository }}/.github/workflows/build-sign.yml@refs/heads/main"
+            echo "enclava deploy --image ${{ env.IMAGE }}@${{ steps.build.outputs.digest }}"
+            echo '```'
+            echo ""
+            echo "_Flip the package to public: GitHub → Packages → enclava-canary → Package settings → Change visibility._"
+          } >> "$GITHUB_STEP_SUMMARY"
