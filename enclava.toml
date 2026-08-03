@@ -1,0 +1,31 @@
+[app]
+name = "enclava-canary"
+port = 8080
+command = ["python3", "/app/server.py"]
+
+[storage]
+paths = ["/app/data"]
+size = "10Gi"
+tls_size = "2Gi"
+
+[unlock]
+mode = "password"
+
+# The canary serves + reads the in-pod sidecar (localhost) — it needs no external
+# egress. Sigstore hosts listed only to mirror a known-good config; unused at runtime.
+[egress]
+allow = [
+  { host = "ghcr.io", ports = [443] },
+  { host = "rekor.sigstore.dev", ports = [443] },
+  { host = "fulcio.sigstore.dev", ports = [443] },
+  { host = "tuf-repo-cdn.sigstore.dev", ports = [443] },
+]
+
+[resources]
+cpu = "1"
+memory = "2Gi"
+
+[health]
+path = "/health"
+interval = 30
+timeout = 5
