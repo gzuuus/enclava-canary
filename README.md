@@ -53,14 +53,36 @@ the signer pinned per-app at `create` time (issuer defaults to GitHub Actions'
      --certificate-oidc-issuer https://token.actions.githubusercontent.com \
      ghcr.io/gzuuus/enclava-canary@sha256:<digest> && echo "signature verified ✅"
    ```
-4. Create + deploy (auto-unlock = cleanest autonomous green):
+4. Create + deploy (**password mode** — the working first-deploy path; see Gotchas):
    ```bash
    enclava create \
      --image ghcr.io/gzuuus/enclava-canary:latest \
      --signer-subject https://github.com/gzuuus/enclava-canary/.github/workflows/build-sign.yml@refs/heads/main
-   enclava deploy --image ghcr.io/gzuuus/enclava-canary@sha256:<digest>
+   enclava deploy --image ghcr.io/gzuuus/enclava-canary@sha256:<digest> \
+     --storage-password-file <path-to-password>
    ```
+   Password mode also surfaces `/status` → `claims_verified` and the ownership
+   identity in the page, and exercises the TEE bootstrap-claim handoff.
 
-A password-mode deploy (instead of step 4) additionally surfaces `/status` →
-`claims_verified` and the ownership identity in the page, and exercises the
-TEE bootstrap-claim handoff.
+## Gotchas (learned the hard way)
+
+- **Use `unlock.mode = "password"` for the first deploy.** `mode = "auto"`
+  stalls: `enclava create` sends no bootstrap identity for auto mode, and
+  `enclava-init`'s auto path awaits a KBS wrap-key the standalone path never
+  provisions → the app hangs at `TEE: unclaimed` indefinitely. Password mode
+  derives the owner seed from the claim password (no KBS dependency). After the
+  first deploy, `enclava auto-unlock enable` can seal the seed for restarts.
+- **`storage.paths` targets must be a `VOLUME` in the image.** The workload
+  rootfs is read-only, so `enclava-init`'s bind fails (`Read-only file system`)
+  unless the path is declared as a volume — hence `VOLUME ["/app/data"]` in this
+  Dockerfile. `enclava status` surfaces the exact failure via `tee_error`. Omit
+  `storage.paths` if your app needs no persistent storage.
+- **Redeploy over a *failed* deploy goes "drifted."** If a deploy fails (e.g. the
+  VOLUME issue above), don't `enclava deploy` a fix over it — the pod won't roll
+  (`Status: drifted`). `enclava destroy --app <name> --force`, then `create` +
+  `deploy` from clean.
+- **Some enclava envs serve a Let's Encrypt *staging* cert** — browsers reject
+  it (`ERR_CERT_AUTHORITY_INVALID`). This is a platform-level tshooting toggle
+  (rate-limit avoidance), not per-app; the canary itself has no TLS knob. Browse
+  with `curl -sk`, snapshot the page, or trust the LE staging root locally. On an
+  env using production LE, certs are browser-trusted automatically.
