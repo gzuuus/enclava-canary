@@ -9,12 +9,13 @@ size = "10Gi"
 tls_size = "2Gi"
 
 [unlock]
-mode = "password"
+mode = "auto"
 
 # The canary serves + reads the in-pod sidecar (localhost) — it needs no external
 # egress. Sigstore hosts listed only to mirror a known-good config; unused at runtime.
 [egress]
 allow = [
+  { host = "kdsintf.amd.com", ports = [443] },
   { host = "ghcr.io", ports = [443] },
   { host = "rekor.sigstore.dev", ports = [443] },
   { host = "fulcio.sigstore.dev", ports = [443] },
