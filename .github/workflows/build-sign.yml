@@ -43,7 +43,10 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Install cosign
-        uses: sigstore/cosign-installer@v3
+        # Installer v4 → cosign 3.x: signs as OCI referrers with a DSSE bundle —
+        # the portable format enclava's fetch_portable_verification_material
+        # requires (same pin as enclava-labs/attestation-proxy-build.yml).
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
 
       - name: Sign image (keyless — GitHub OIDC → Fulcio)
         env:
