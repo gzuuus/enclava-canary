@@ -1,0 +1,29 @@
+name: verify-nightly
+
+# Re-runs the canary's proof claim independently: fetches a fresh nonce-bound
+# SEV-SNP proof bundle from the live origin and appraises it against
+# trust-policy.json (obtained from this repo, not from the VM).
+# Red until the proof-serving proxy is rolled out to the canary's env — see
+# README "Independent verification".
+
+on:
+  schedule:
+    - cron: "23 3 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Pinned to the last public rev before the org-signing-key custody wave —
+      # matches the canary's platform. Bump deliberately.
+      - name: Install enclava CLI (pinned rev)
+        run: cargo install --git https://github.com/enclava-labs/cap --rev 5d17ebc0b9aa6ca252b39400f50a448061fc7c00 enclava-cli --locked
+
+      - name: Verify live canary (proof bundle + policy appraisal)
+        run: enclava verify https://enclava-canary.ccfc06d3.enclava.dev --policy trust-policy.json

@@ -34,6 +34,7 @@
     background: #020617; border: 1px solid rgba(148,163,184,.15); border-radius: 12px;
     padding: 1rem; overflow: auto; font-size: .78rem; margin: 2rem 0 0;
   }
+  footer a { color: #7dd3fc; }
   footer { margin-top: 2.5rem; color: #64748b; font-size: .82rem; line-height: 1.6; }
   code { background: rgba(148,163,184,.12); padding: .1rem .35rem; border-radius: 4px; font-family: ui-monospace, monospace; }
 </style>
@@ -45,13 +46,21 @@
   <p class="lede">This page is served by a process running inside a hardware-isolated
   SEV-SNP virtual machine. The attestation data below was fetched at request time from the
   in-pod <code>attestation-proxy</code> sidecar — the same attested component that verified
-  this VM's identity and measurement against the signed platform policy at boot.</p>
+  this VM's identity and measurement against the signed platform policy at boot.
+  Treat everything here as a <em>claim</em> — the way to prove it is at the bottom of this page.</p>
   <div class="grid" id="cards"></div>
   <pre id="raw"></pre>
   <footer>
-    <strong>Verify this VM yourself:</strong> issue a nonce challenge to the evidence endpoint
-    shown under <em>Attestation → evidence_endpoint</em>, e.g.<br>
-    <code>curl "http://&lt;host&gt;:8081/v1/attestation?nonce=&lt;base64-32B&gt;&amp;domain=&lt;host&gt;&amp;leaf_spki_sha256=&lt;hex&gt;"</code><br><br>
+    <strong>This page is a claim, not proof.</strong> Everything above is rendered by the
+    workload itself — a page can say anything, and so could a workload on an ordinary host.
+    The proof lives behind the platform's reserved endpoint inside the VM, which answers
+    every nonce you send with fresh AMD SEV-SNP evidence bound to this TLS channel.
+    Verify it yourself:<br>
+    <code>enclava verify https://enclava-canary.ccfc06d3.enclava.dev --policy trust-policy.json</code><br>
+    The policy — allowed measurements, TCB floor, AMD ARK, image digest + signer — lives in
+    <a href="https://github.com/gzuuus/enclava-canary#independent-verification">the canary repo</a>,
+    and CI re-runs the verification nightly. A green badge there is the canary's real health
+    signal; this page has no say in it.<br><br>
     <span class="muted">enclava-canary · minimal workload for custom-image confidential deploys</span>
   </footer>
 </div>

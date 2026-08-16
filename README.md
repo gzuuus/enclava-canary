@@ -22,8 +22,35 @@ the TEE's attestation visible in the browser.
 
 The attestation data is fetched **server-side** (the sidecar is only reachable
 inside the pod, not from the visitor's browser). The page therefore shows what
-the TEE's attested sidecar reports; an out-of-band nonce challenge (shown at the
-bottom of the page) is how a third party would independently verify it.
+the TEE's attested sidecar reports; the `enclava verify` command — shown at the
+bottom of the page and in [Independent verification](#independent-verification)
+below — is how a third party turns that into proof.
+
+## Independent verification
+
+The page is a **claim** — served by the workload, so it could say anything, from any host.
+The **proof** is the platform's reserved endpoint, served from inside the VM:
+`GET /.well-known/confidential/proof-bundle?nonce=…` answers with an AMD SEV-SNP evidence
+bundle (launch measurement, TCB, VCEK/ARK endorsement chain) carrying your nonce, bound to
+the TLS channel — so replays and man-in-the-middle both fail appraisal.
+
+Verify the live canary:
+
+```bash
+cargo install --git https://github.com/enclava-labs/cap enclava-cli   # or a pinned --rev
+enclava verify https://enclava-canary.ccfc06d3.enclava.dev --policy trust-policy.json
+```
+
+- `trust-policy.json` (repo root) defines "good": allowed AMD measurements, minimum TCB,
+  ARK hash, the workload image digest + cosign signer, the attestation-proxy digest,
+  runtime class, and origin. It is obtained from this repo — not from the VM being verified.
+- CI re-runs the verification nightly ([`verify-nightly`](.github/workflows/verify-nightly.yml),
+  pinned CLI rev); the badge is the canary's real health signal — the page has no say in it.
+  Until the proof-serving proxy rolls out to the canary's environment, the job runs **red**:
+  the honest state, since an endpoint that isn't served yet can't pass — and a badge that
+  can't fail proves nothing.
+
+[![verify-nightly](https://github.com/gzuuus/enclava-canary/actions/workflows/verify-nightly.yml/badge.svg)](https://github.com/gzuuus/enclava-canary/actions/workflows/verify-nightly.yml)
 
 ## Run locally
 
