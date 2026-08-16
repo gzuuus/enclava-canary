@@ -1,0 +1,103 @@
+{
+  "schema_version": "enclava-trust-policy-v1",
+  "label": "enclava-canary preprod independent verification",
+  "required_checks": [
+    "binding.challenge_nonce",
+    "binding.target_origin",
+    "policy.structure",
+    "amd.report_structure",
+    "amd.endorsements_structure",
+    "binding.tls_leaf_certificate",
+    "amd.certificate_chain",
+    "amd.report_signature",
+    "amd.vcek_binding",
+    "amd.revocation.freshness",
+    "amd.measurement",
+    "amd.tcb",
+    "amd.guest_policy",
+    "binding.report_data",
+    "policy.target_origin",
+    "artifacts.signatures",
+    "artifacts.relationships",
+    "artifacts.descriptor_measurement",
+    "supply_chain.image_policy",
+    "platform.runtime_class",
+    "platform.sidecars",
+    "platform.release",
+    "deployment.identity",
+    "supply_chain.portable_integrity",
+    "supply_chain.signatures"
+  ],
+  "amd": {
+    "trusted_ark_sha256": [
+      "4c6598d19c18719c5dfd4a7d335f674e5bfe1d8f800cea2cf270c10d103db2f1"
+    ],
+    "allowed_measurements": [
+      "853739f980c88e3b2df5aa951d221cd33a35f13e16819ab9871949699ba6c7882c7b1b3ead64d214572ba452c09de96f"
+    ],
+    "minimum_tcb": {
+      "bootloader": 10,
+      "tee": 0,
+      "fmc": 0,
+      "snp": 24,
+      "microcode": 84
+    },
+    "guest_policy_mask": 18446744073709551615,
+    "guest_policy_value": 196608,
+    "revocation_max_age_seconds": 3888000
+  },
+  "target": {
+    "origins": [
+      "https://enclava-canary.ccfc06d3.enclava.dev"
+    ],
+    "image_digests": [
+      "sha256:6286876729f5ac6ca43694988954113925653b148f76cc12a4c65c1e74e976c4"
+    ],
+    "runtime_classes": [
+      "kata-qemu-snp"
+    ],
+    "attestation_proxy_digests": [
+      "sha256:9ccd66a38854a931d427acc6ce450f1070dc615da7c8fc28a4b2ae16f0033355"
+    ],
+    "caddy_digests": [
+      "sha256:54d00d58cea066b52ea7cfe3dd60c1d79236dabdce72f75aa375e50a0b063200"
+    ],
+    "platform_release_versions": [
+      "dev-2026.08.16-attestation-proxy-9ccd66a3.1"
+    ],
+    "organization_ids": [
+      "be2a71e5-4fe3-489d-9a51-8f8c75f50158"
+    ],
+    "application_ids": [
+      "3cc4c685-45fa-8d13-9c53-20da9693064f"
+    ]
+  },
+  "trusted_org_keyring_sha256": [
+    "e3637a122a0e90fc03003c260ec588c9313c2d46f29e4f06bea9ef2a8a494c4f"
+  ],
+  "trusted_policy_signing_pubkeys": [
+    "50bc3000f8aaba75b5aa47e45d64d5cf24c891e9711336e881797fe8a63c575d"
+  ],
+  "sigstore": {
+    "fulcio_roots_der_base64": [
+      "MIIB9zCCAXygAwIBAgIUALZNAPFdxHPwjeDloDwyYChAO/4wCgYIKoZIzj0EAwMwKjEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MREwDwYDVQQDEwhzaWdzdG9yZTAeFw0yMTEwMDcxMzU2NTlaFw0zMTEwMDUxMzU2NThaMCoxFTATBgNVBAoTDHNpZ3N0b3JlLmRldjERMA8GA1UEAxMIc2lnc3RvcmUwdjAQBgcqhkjOPQIBBgUrgQQAIgNiAAT7XeFT4rb3PQGwS4IajtLk3/OlnpgangaBclYpsYBr5i+4ynB07ceb3LP0OIOZdxexX69c5iVuyJRQ+Hz05yi+UF3uBWAlHpiS5sh0+H2GHE7SXrk1EC5m1Tr19L9gg92jYzBhMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBRYwB5fkUWlZql6zJChkyLQKsXF+jAfBgNVHSMEGDAWgBRYwB5fkUWlZql6zJChkyLQKsXF+jAKBggqhkjOPQQDAwNpADBmAjEAj1nHeXZp+13NWBNa+EDsDP8G1WWg1tCMWP/WHPqpaVo0jhsweNFZgSs0eE7wYI4qAjEA2WB9ot98sIkoF3vZYdd3/VtWB5b9TNMea7Ix/stJ5TfcLLeABLE4BNJOsQ4vnBHJ"
+    ],
+    "fulcio_intermediates_der_base64": [
+      "MIICGjCCAaGgAwIBAgIUALnViVfnU0brJasmRkHrn/UnfaQwCgYIKoZIzj0EAwMwKjEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MREwDwYDVQQDEwhzaWdzdG9yZTAeFw0yMjA0MTMyMDA2MTVaFw0zMTEwMDUxMzU2NThaMDcxFTATBgNVBAoTDHNpZ3N0b3JlLmRldjEeMBwGA1UEAxMVc2lnc3RvcmUtaW50ZXJtZWRpYXRlMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAE8RVS/ysH+NOvuDZyPIZtilgUF9NlarYpAd9HP1vBBH1U5CV77LSS7s0ZiH4nE7Hv7ptS6LvvR/STk798LVgMzLlJ4HeIfF3tHSaexLcYpSASr1kS0N/RgBJz/9jWCiXno3sweTAOBgNVHQ8BAf8EBAMCAQYwEwYDVR0lBAwwCgYIKwYBBQUHAwMwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQU39Ppz1YkEZb5qNjpKFWixi4YZD8wHwYDVR0jBBgwFoAUWMAeX5FFpWapesyQoZMi0CrFxfowCgYIKoZIzj0EAwMDZwAwZAIwPCsQK4DYiZYDPIaDi5HFKnfxXx6ASSVmERfsynYBiX2X6SJRnZU84/9DZdnFvvxmAjBOt6QpBlc4J/0DxvkTCqpclvziL6BCCPnjdlIB3Pu3BxsPmygUY7Ii2zbdCdliiow="
+    ],
+    "trusted_fulcio_root_sha256": [
+      "3ba7b6cc4e95469d4d334b49cb257ad8537076fa84b0ca87ff4ecfe6a54680c1"
+    ],
+    "rekor_spki_der_base64": [
+      "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE2G2Y+2tabdTV5BcGiBIx0a9fAFwrkBbmLSGtks4L3qX6yYY0zufBnhC8Ur/iy55GhWP/9A/bY2LhC30M9+RYtw=="
+    ],
+    "certificate_identity": "https://github.com/gzuuus/enclava-canary/.github/workflows/build-sign.yml@refs/heads/main",
+    "oidc_issuer": "https://token.actions.githubusercontent.com",
+    "source_repository": "gzuuus/enclava-canary",
+    "workflow_ref": "gzuuus/enclava-canary/.github/workflows/build-sign.yml@refs/heads/main",
+    "provenance_builder_id": "https://github.com/gzuuus/enclava-canary/actions/runs/31941541448/attempts/1"
+  },
+  "transport": {
+    "require_tls_channel_spki": false
+  }
+}
