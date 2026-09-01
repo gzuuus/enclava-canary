@@ -113,3 +113,5 @@ the signer pinned per-app at `create` time (issuer defaults to GitHub Actions'
   (rate-limit avoidance), not per-app; the canary itself has no TLS knob. Browse
   with `curl -sk`, snapshot the page, or trust the LE staging root locally. On an
   env using production LE, certs are browser-trusted automatically.
+
+<!-- e2e-refresh 2026-09-01: fresh digest for the VCEK-cache E2E outage drill (same workload, new signed build) -->
