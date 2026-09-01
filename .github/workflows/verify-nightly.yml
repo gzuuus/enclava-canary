@@ -26,4 +26,4 @@ jobs:
         run: cargo install --git https://github.com/enclava-labs/cap --rev 5d17ebc0b9aa6ca252b39400f50a448061fc7c00 enclava-cli --locked
 
       - name: Verify live canary (proof bundle + policy appraisal)
-        run: enclava verify https://enclava-canary.ccfc06d3.enclava.dev --policy trust-policy.json
+        run: enclava verify https://e2e-drill.ccfc06d3.enclava.dev --policy trust-policy.json

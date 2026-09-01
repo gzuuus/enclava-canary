@@ -48,10 +48,10 @@
   },
   "target": {
     "origins": [
-      "https://enclava-canary.ccfc06d3.enclava.dev"
+      "https://e2e-drill.ccfc06d3.enclava.dev"
     ],
     "image_digests": [
-      "sha256:6286876729f5ac6ca43694988954113925653b148f76cc12a4c65c1e74e976c4"
+      "sha256:8d89cfaa03d93eeb4dda42a8a8783325b2f3d5c8a1e81b8770d62d9209af58d1"
     ],
     "runtime_classes": [
       "kata-qemu-snp"
@@ -69,7 +69,7 @@
       "be2a71e5-4fe3-489d-9a51-8f8c75f50158"
     ],
     "application_ids": [
-      "3cc4c685-45fa-8d13-9c53-20da9693064f"
+      "7b36869f-8ffa-8f99-b14b-d3f250d511b9"
     ]
   },
   "trusted_org_keyring_sha256": [
@@ -95,7 +95,7 @@
     "oidc_issuer": "https://token.actions.githubusercontent.com",
     "source_repository": "gzuuus/enclava-canary",
     "workflow_ref": "gzuuus/enclava-canary/.github/workflows/build-sign.yml@refs/heads/main",
-    "provenance_builder_id": "https://github.com/gzuuus/enclava-canary/actions/runs/31941541448/attempts/1"
+    "provenance_builder_id": "https://github.com/gzuuus/enclava-canary/actions/runs/33516381539/attempts/1"
   },
   "transport": {
     "require_tls_channel_spki": false

@@ -38,7 +38,7 @@ Verify the live canary:
 
 ```bash
 cargo install --git https://github.com/enclava-labs/cap enclava-cli   # or a pinned --rev
-enclava verify https://enclava-canary.ccfc06d3.enclava.dev --policy trust-policy.json
+enclava verify https://e2e-drill.ccfc06d3.enclava.dev --policy trust-policy.json
 ```
 
 - `trust-policy.json` (repo root) defines "good": allowed AMD measurements, minimum TCB,
