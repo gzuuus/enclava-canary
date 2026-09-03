@@ -1,5 +1,5 @@
 [app]
-name = "enclava-canary"
+name = "e2e-drill"
 port = 8080
 command = ["python3", "/app/server.py"]
 
