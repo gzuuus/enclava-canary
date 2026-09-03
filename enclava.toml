@@ -9,7 +9,7 @@ size = "10Gi"
 tls_size = "2Gi"
 
 [unlock]
-mode = "auto"
+mode = "password"
 
 # The canary serves + reads the in-pod sidecar (localhost) — it needs no external
 # egress. Sigstore hosts listed only to mirror a known-good config; unused at runtime.
