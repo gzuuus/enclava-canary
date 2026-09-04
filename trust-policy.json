@@ -48,10 +48,10 @@
   },
   "target": {
     "origins": [
-      "https://e2e-drill.ccfc06d3.enclava.dev"
+      "https://e2e-drill.e62d05ff.enclava.dev"
     ],
     "image_digests": [
-      "sha256:8d89cfaa03d93eeb4dda42a8a8783325b2f3d5c8a1e81b8770d62d9209af58d1"
+      "sha256:321312aeec9c6b3f874615131fc95887414e82d139a0d09360b9710cdf3c51ac"
     ],
     "runtime_classes": [
       "kata-qemu-snp"
@@ -66,14 +66,14 @@
       "dev-2026.08.16-attestation-proxy-9ccd66a3.1"
     ],
     "organization_ids": [
-      "be2a71e5-4fe3-489d-9a51-8f8c75f50158"
+      "b7b7638b-c9f8-46a8-9cc8-567a16b3a0bd"
     ],
     "application_ids": [
-      "7b36869f-8ffa-8f99-b14b-d3f250d511b9"
+      "9150203d-6508-82d6-b376-824ba840a9b5"
     ]
   },
   "trusted_org_keyring_sha256": [
-    "e3637a122a0e90fc03003c260ec588c9313c2d46f29e4f06bea9ef2a8a494c4f"
+    "46293a7c3f9336fde56065b127b05efca3de9896838d64777cd8b89415cd6164"
   ],
   "trusted_policy_signing_pubkeys": [
     "50bc3000f8aaba75b5aa47e45d64d5cf24c891e9711336e881797fe8a63c575d"
