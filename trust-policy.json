@@ -95,7 +95,7 @@
     "oidc_issuer": "https://token.actions.githubusercontent.com",
     "source_repository": "gzuuus/enclava-canary",
     "workflow_ref": "gzuuus/enclava-canary/.github/workflows/build-sign.yml@refs/heads/main",
-    "provenance_builder_id": "https://github.com/gzuuus/enclava-canary/actions/runs/33516381539/attempts/1"
+    "provenance_builder_id": "https://github.com/gzuuus/enclava-canary/actions/runs/33820276845/attempts/1"
   },
   "transport": {
     "require_tls_channel_spki": false
