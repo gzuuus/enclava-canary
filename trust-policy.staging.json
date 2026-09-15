@@ -1,0 +1,103 @@
+{
+  "amd": {
+    "allowed_measurements": [
+      "dbf5e0ee559e016dbb7322fbee35c9e84922b055a210317129c4dae3b3ddf51ff28cf1181e65d0d4ade9b1b070462c67"
+    ],
+    "guest_policy_mask": 18446744073709551615,
+    "guest_policy_value": 196608,
+    "minimum_tcb": {
+      "bootloader": 12,
+      "fmc": 0,
+      "microcode": 88,
+      "snp": 28,
+      "tee": 0
+    },
+    "revocation_max_age_seconds": 3888000,
+    "trusted_ark_sha256": [
+      "4c6598d19c18719c5dfd4a7d335f674e5bfe1d8f800cea2cf270c10d103db2f1"
+    ]
+  },
+  "label": "TOFU skeleton observed 2026-09-15T14:26:44Z https://canary2.0adc760b.dev.enclava.work",
+  "required_checks": [
+    "binding.challenge_nonce",
+    "binding.target_origin",
+    "policy.structure",
+    "amd.report_structure",
+    "amd.endorsements_structure",
+    "binding.tls_leaf_certificate",
+    "amd.certificate_chain",
+    "amd.report_signature",
+    "amd.vcek_binding",
+    "amd.revocation.freshness",
+    "amd.measurement",
+    "amd.tcb",
+    "amd.guest_policy",
+    "binding.report_data",
+    "policy.target_origin",
+    "artifacts.signatures",
+    "artifacts.relationships",
+    "artifacts.descriptor_measurement",
+    "supply_chain.image_policy",
+    "platform.runtime_class",
+    "platform.sidecars",
+    "platform.release",
+    "deployment.identity",
+    "supply_chain.portable_integrity",
+    "supply_chain.signatures"
+  ],
+  "schema_version": "enclava-trust-policy-v1",
+  "sigstore": {
+    "certificate_identity": "https://github.com/gzuuus/enclava-canary/.github/workflows/build-sign.yml@refs/heads/main",
+    "fulcio_intermediates_der_base64": [
+      "MIICGjCCAaGgAwIBAgIUALnViVfnU0brJasmRkHrn/UnfaQwCgYIKoZIzj0EAwMwKjEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MREwDwYDVQQDEwhzaWdzdG9yZTAeFw0yMjA0MTMyMDA2MTVaFw0zMTEwMDUxMzU2NThaMDcxFTATBgNVBAoTDHNpZ3N0b3JlLmRldjEeMBwGA1UEAxMVc2lnc3RvcmUtaW50ZXJtZWRpYXRlMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAE8RVS/ysH+NOvuDZyPIZtilgUF9NlarYpAd9HP1vBBH1U5CV77LSS7s0ZiH4nE7Hv7ptS6LvvR/STk798LVgMzLlJ4HeIfF3tHSaexLcYpSASr1kS0N/RgBJz/9jWCiXno3sweTAOBgNVHQ8BAf8EBAMCAQYwEwYDVR0lBAwwCgYIKwYBBQUHAwMwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQU39Ppz1YkEZb5qNjpKFWixi4YZD8wHwYDVR0jBBgwFoAUWMAeX5FFpWapesyQoZMi0CrFxfowCgYIKoZIzj0EAwMDZwAwZAIwPCsQK4DYiZYDPIaDi5HFKnfxXx6ASSVmERfsynYBiX2X6SJRnZU84/9DZdnFvvxmAjBOt6QpBlc4J/0DxvkTCqpclvziL6BCCPnjdlIB3Pu3BxsPmygUY7Ii2zbdCdliiow="
+    ],
+    "fulcio_roots_der_base64": [
+      "MIIB9zCCAXygAwIBAgIUALZNAPFdxHPwjeDloDwyYChAO/4wCgYIKoZIzj0EAwMwKjEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MREwDwYDVQQDEwhzaWdzdG9yZTAeFw0yMTEwMDcxMzU2NTlaFw0zMTEwMDUxMzU2NThaMCoxFTATBgNVBAoTDHNpZ3N0b3JlLmRldjERMA8GA1UEAxMIc2lnc3RvcmUwdjAQBgcqhkjOPQIBBgUrgQQAIgNiAAT7XeFT4rb3PQGwS4IajtLk3/OlnpgangaBclYpsYBr5i+4ynB07ceb3LP0OIOZdxexX69c5iVuyJRQ+Hz05yi+UF3uBWAlHpiS5sh0+H2GHE7SXrk1EC5m1Tr19L9gg92jYzBhMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBRYwB5fkUWlZql6zJChkyLQKsXF+jAfBgNVHSMEGDAWgBRYwB5fkUWlZql6zJChkyLQKsXF+jAKBggqhkjOPQQDAwNpADBmAjEAj1nHeXZp+13NWBNa+EDsDP8G1WWg1tCMWP/WHPqpaVo0jhsweNFZgSs0eE7wYI4qAjEA2WB9ot98sIkoF3vZYdd3/VtWB5b9TNMea7Ix/stJ5TfcLLeABLE4BNJOsQ4vnBHJ"
+    ],
+    "oidc_issuer": "https://token.actions.githubusercontent.com",
+    "provenance_builder_id": "https://github.com/gzuuus/enclava-canary/actions/runs/34247727218/attempts/1",
+    "rekor_spki_der_base64": [
+      "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE2G2Y+2tabdTV5BcGiBIx0a9fAFwrkBbmLSGtks4L3qX6yYY0zufBnhC8Ur/iy55GhWP/9A/bY2LhC30M9+RYtw=="
+    ],
+    "source_repository": "gzuuus/enclava-canary",
+    "trusted_fulcio_root_sha256": [
+      "3ba7b6cc4e95469d4d334b49cb257ad8537076fa84b0ca87ff4ecfe6a54680c1"
+    ],
+    "workflow_ref": "gzuuus/enclava-canary/.github/workflows/build-sign.yml@refs/heads/main"
+  },
+  "target": {
+    "application_ids": [
+      "51b70b39-a289-886d-a93a-81a8274d09a5"
+    ],
+    "attestation_proxy_digests": [
+      "sha256:34049f0aa90e653713196dce0aa71f6fd803aee45913184107fff952d46fa693"
+    ],
+    "caddy_digests": [
+      "sha256:ba4182b5a9196649f1a43e38a434238f8826540bf0289b61e517e0143f16071e"
+    ],
+    "image_digests": [
+      "sha256:a9def133af1d215b58dd854ba9cf8b5a1a1caa3adc430456831687ffaaf50289"
+    ],
+    "organization_ids": [
+      "1ecb2fbe-b4f5-44dd-8e1e-696e1bc3770e"
+    ],
+    "origins": [
+      "https://canary2.0adc760b.dev.enclava.work"
+    ],
+    "platform_release_versions": [
+      "dev-2026.09.09-release-reliability.1"
+    ],
+    "runtime_classes": [
+      "kata-qemu-snp"
+    ]
+  },
+  "transport": {
+    "require_tls_channel_spki": false
+  },
+  "trusted_org_keyring_sha256": [
+    "2463c8b8376c4514228a7b63406117b24b1f0ece686e9a30ba4a801d1c0aa02e"
+  ],
+  "trusted_policy_signing_pubkeys": [
+    "8e8c2d06c66cd21be5069fad1978800b8202ad846877ec3ff023c8cb803448b2"
+  ]
+}
