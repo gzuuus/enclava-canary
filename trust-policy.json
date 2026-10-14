@@ -1,103 +1,103 @@
 {
-  "schema_version": "enclava-trust-policy-v1",
-  "label": "e2e-drill preprod independent verification (repinned 2026-09-08: fresh app post stale-seed incident, digest b555ce84)",
-  "required_checks": [
-    "binding.challenge_nonce",
-    "binding.target_origin",
-    "policy.structure",
-    "amd.report_structure",
-    "amd.endorsements_structure",
-    "binding.tls_leaf_certificate",
-    "amd.certificate_chain",
-    "amd.report_signature",
-    "amd.vcek_binding",
-    "amd.revocation.freshness",
-    "amd.measurement",
-    "amd.tcb",
-    "amd.guest_policy",
-    "binding.report_data",
-    "policy.target_origin",
-    "artifacts.signatures",
-    "artifacts.relationships",
-    "artifacts.descriptor_measurement",
-    "supply_chain.image_policy",
-    "platform.runtime_class",
-    "platform.sidecars",
-    "platform.release",
-    "deployment.identity",
-    "supply_chain.portable_integrity",
-    "supply_chain.signatures"
+ "amd": {
+  "allowed_measurements": [
+   "dbf5e0ee559e016dbb7322fbee35c9e84922b055a210317129c4dae3b3ddf51ff28cf1181e65d0d4ade9b1b070462c67"
   ],
-  "amd": {
-    "trusted_ark_sha256": [
-      "4c6598d19c18719c5dfd4a7d335f674e5bfe1d8f800cea2cf270c10d103db2f1"
-    ],
-    "allowed_measurements": [
-      "853739f980c88e3b2df5aa951d221cd33a35f13e16819ab9871949699ba6c7882c7b1b3ead64d214572ba452c09de96f"
-    ],
-    "minimum_tcb": {
-      "bootloader": 10,
-      "tee": 0,
-      "fmc": 0,
-      "snp": 24,
-      "microcode": 84
-    },
-    "guest_policy_mask": 18446744073709551615,
-    "guest_policy_value": 196608,
-    "revocation_max_age_seconds": 3888000
+  "guest_policy_mask": 18446744073709551615,
+  "guest_policy_value": 196608,
+  "minimum_tcb": {
+   "bootloader": 12,
+   "fmc": 0,
+   "microcode": 88,
+   "snp": 28,
+   "tee": 0
   },
-  "target": {
-    "application_ids": [
-      "de7dbfad-238b-8703-916d-367a4de434ee"
-    ],
-    "attestation_proxy_digests": [
-      "sha256:8d01f80ff9d051ea40c0da0543682c1b33898b795c5f1f755e852cd205d930fa"
-    ],
-    "caddy_digests": [
-      "sha256:ba4182b5a9196649f1a43e38a434238f8826540bf0289b61e517e0143f16071e"
-    ],
-    "image_digests": [
-      "sha256:b555ce84fb55ae28510bdf493d3891da3766478a7b92e8dbd341cf4fffba8442"
-    ],
-    "organization_ids": [
-      "b7b7638b-c9f8-46a8-9cc8-567a16b3a0bd"
-    ],
-    "origins": [
-      "https://e2e-drill.e62d05ff.enclava.dev"
-    ],
-    "platform_release_versions": [
-      "preprod-2026.09.08-wave-b-parity.2"
-    ],
-    "runtime_classes": [
-      "kata-qemu-snp"
-    ]
-  },
-  "trusted_org_keyring_sha256": [
-    "46293a7c3f9336fde56065b127b05efca3de9896838d64777cd8b89415cd6164"
+  "revocation_max_age_seconds": 3888000,
+  "trusted_ark_sha256": [
+   "4c6598d19c18719c5dfd4a7d335f674e5bfe1d8f800cea2cf270c10d103db2f1"
+  ]
+ },
+ "label": "canary-r14 staging independent verification (repinned 2026-10-14: staging cluster, image 9a296e64 under the 4Gi logs fence)",
+ "required_checks": [
+  "binding.challenge_nonce",
+  "binding.target_origin",
+  "policy.structure",
+  "amd.report_structure",
+  "amd.endorsements_structure",
+  "binding.tls_leaf_certificate",
+  "amd.certificate_chain",
+  "amd.report_signature",
+  "amd.vcek_binding",
+  "amd.revocation.freshness",
+  "amd.measurement",
+  "amd.tcb",
+  "amd.guest_policy",
+  "binding.report_data",
+  "policy.target_origin",
+  "artifacts.signatures",
+  "artifacts.relationships",
+  "artifacts.descriptor_measurement",
+  "supply_chain.image_policy",
+  "platform.runtime_class",
+  "platform.sidecars",
+  "platform.release",
+  "deployment.identity",
+  "supply_chain.portable_integrity",
+  "supply_chain.signatures"
+ ],
+ "schema_version": "enclava-trust-policy-v1",
+ "sigstore": {
+  "fulcio_roots_der_base64": [
+   "MIIB9zCCAXygAwIBAgIUALZNAPFdxHPwjeDloDwyYChAO/4wCgYIKoZIzj0EAwMwKjEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MREwDwYDVQQDEwhzaWdzdG9yZTAeFw0yMTEwMDcxMzU2NTlaFw0zMTEwMDUxMzU2NThaMCoxFTATBgNVBAoTDHNpZ3N0b3JlLmRldjERMA8GA1UEAxMIc2lnc3RvcmUwdjAQBgcqhkjOPQIBBgUrgQQAIgNiAAT7XeFT4rb3PQGwS4IajtLk3/OlnpgangaBclYpsYBr5i+4ynB07ceb3LP0OIOZdxexX69c5iVuyJRQ+Hz05yi+UF3uBWAlHpiS5sh0+H2GHE7SXrk1EC5m1Tr19L9gg92jYzBhMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBRYwB5fkUWlZql6zJChkyLQKsXF+jAfBgNVHSMEGDAWgBRYwB5fkUWlZql6zJChkyLQKsXF+jAKBggqhkjOPQQDAwNpADBmAjEAj1nHeXZp+13NWBNa+EDsDP8G1WWg1tCMWP/WHPqpaVo0jhsweNFZgSs0eE7wYI4qAjEA2WB9ot98sIkoF3vZYdd3/VtWB5b9TNMea7Ix/stJ5TfcLLeABLE4BNJOsQ4vnBHJ"
   ],
-  "trusted_policy_signing_pubkeys": [
-    "50bc3000f8aaba75b5aa47e45d64d5cf24c891e9711336e881797fe8a63c575d"
+  "fulcio_intermediates_der_base64": [
+   "MIICGjCCAaGgAwIBAgIUALnViVfnU0brJasmRkHrn/UnfaQwCgYIKoZIzj0EAwMwKjEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MREwDwYDVQQDEwhzaWdzdG9yZTAeFw0yMjA0MTMyMDA2MTVaFw0zMTEwMDUxMzU2NThaMDcxFTATBgNVBAoTDHNpZ3N0b3JlLmRldjEeMBwGA1UEAxMVc2lnc3RvcmUtaW50ZXJtZWRpYXRlMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAE8RVS/ysH+NOvuDZyPIZtilgUF9NlarYpAd9HP1vBBH1U5CV77LSS7s0ZiH4nE7Hv7ptS6LvvR/STk798LVgMzLlJ4HeIfF3tHSaexLcYpSASr1kS0N/RgBJz/9jWCiXno3sweTAOBgNVHQ8BAf8EBAMCAQYwEwYDVR0lBAwwCgYIKwYBBQUHAwMwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQU39Ppz1YkEZb5qNjpKFWixi4YZD8wHwYDVR0jBBgwFoAUWMAeX5FFpWapesyQoZMi0CrFxfowCgYIKoZIzj0EAwMDZwAwZAIwPCsQK4DYiZYDPIaDi5HFKnfxXx6ASSVmERfsynYBiX2X6SJRnZU84/9DZdnFvvxmAjBOt6QpBlc4J/0DxvkTCqpclvziL6BCCPnjdlIB3Pu3BxsPmygUY7Ii2zbdCdliiow="
   ],
-  "sigstore": {
-    "fulcio_roots_der_base64": [
-      "MIIB9zCCAXygAwIBAgIUALZNAPFdxHPwjeDloDwyYChAO/4wCgYIKoZIzj0EAwMwKjEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MREwDwYDVQQDEwhzaWdzdG9yZTAeFw0yMTEwMDcxMzU2NTlaFw0zMTEwMDUxMzU2NThaMCoxFTATBgNVBAoTDHNpZ3N0b3JlLmRldjERMA8GA1UEAxMIc2lnc3RvcmUwdjAQBgcqhkjOPQIBBgUrgQQAIgNiAAT7XeFT4rb3PQGwS4IajtLk3/OlnpgangaBclYpsYBr5i+4ynB07ceb3LP0OIOZdxexX69c5iVuyJRQ+Hz05yi+UF3uBWAlHpiS5sh0+H2GHE7SXrk1EC5m1Tr19L9gg92jYzBhMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBRYwB5fkUWlZql6zJChkyLQKsXF+jAfBgNVHSMEGDAWgBRYwB5fkUWlZql6zJChkyLQKsXF+jAKBggqhkjOPQQDAwNpADBmAjEAj1nHeXZp+13NWBNa+EDsDP8G1WWg1tCMWP/WHPqpaVo0jhsweNFZgSs0eE7wYI4qAjEA2WB9ot98sIkoF3vZYdd3/VtWB5b9TNMea7Ix/stJ5TfcLLeABLE4BNJOsQ4vnBHJ"
-    ],
-    "fulcio_intermediates_der_base64": [
-      "MIICGjCCAaGgAwIBAgIUALnViVfnU0brJasmRkHrn/UnfaQwCgYIKoZIzj0EAwMwKjEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MREwDwYDVQQDEwhzaWdzdG9yZTAeFw0yMjA0MTMyMDA2MTVaFw0zMTEwMDUxMzU2NThaMDcxFTATBgNVBAoTDHNpZ3N0b3JlLmRldjEeMBwGA1UEAxMVc2lnc3RvcmUtaW50ZXJtZWRpYXRlMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAE8RVS/ysH+NOvuDZyPIZtilgUF9NlarYpAd9HP1vBBH1U5CV77LSS7s0ZiH4nE7Hv7ptS6LvvR/STk798LVgMzLlJ4HeIfF3tHSaexLcYpSASr1kS0N/RgBJz/9jWCiXno3sweTAOBgNVHQ8BAf8EBAMCAQYwEwYDVR0lBAwwCgYIKwYBBQUHAwMwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQU39Ppz1YkEZb5qNjpKFWixi4YZD8wHwYDVR0jBBgwFoAUWMAeX5FFpWapesyQoZMi0CrFxfowCgYIKoZIzj0EAwMDZwAwZAIwPCsQK4DYiZYDPIaDi5HFKnfxXx6ASSVmERfsynYBiX2X6SJRnZU84/9DZdnFvvxmAjBOt6QpBlc4J/0DxvkTCqpclvziL6BCCPnjdlIB3Pu3BxsPmygUY7Ii2zbdCdliiow="
-    ],
-    "trusted_fulcio_root_sha256": [
-      "3ba7b6cc4e95469d4d334b49cb257ad8537076fa84b0ca87ff4ecfe6a54680c1"
-    ],
-    "rekor_spki_der_base64": [
-      "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE2G2Y+2tabdTV5BcGiBIx0a9fAFwrkBbmLSGtks4L3qX6yYY0zufBnhC8Ur/iy55GhWP/9A/bY2LhC30M9+RYtw=="
-    ],
-    "certificate_identity": "https://github.com/gzuuus/enclava-canary/.github/workflows/build-sign.yml@refs/heads/main",
-    "oidc_issuer": "https://token.actions.githubusercontent.com",
-    "source_repository": "gzuuus/enclava-canary",
-    "workflow_ref": "gzuuus/enclava-canary/.github/workflows/build-sign.yml@refs/heads/main",
-    "provenance_builder_id": "https://github.com/gzuuus/enclava-canary/actions/runs/33820276845/attempts/1"
-  },
-  "transport": {
-    "require_tls_channel_spki": false
-  }
+  "trusted_fulcio_root_sha256": [
+   "3ba7b6cc4e95469d4d334b49cb257ad8537076fa84b0ca87ff4ecfe6a54680c1"
+  ],
+  "rekor_spki_der_base64": [
+   "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE2G2Y+2tabdTV5BcGiBIx0a9fAFwrkBbmLSGtks4L3qX6yYY0zufBnhC8Ur/iy55GhWP/9A/bY2LhC30M9+RYtw=="
+  ],
+  "certificate_identity": "https://github.com/gzuuus/enclava-canary/.github/workflows/build-sign.yml@refs/heads/main",
+  "oidc_issuer": "https://token.actions.githubusercontent.com",
+  "source_repository": "gzuuus/enclava-canary",
+  "workflow_ref": "gzuuus/enclava-canary/.github/workflows/build-sign.yml@refs/heads/main",
+  "provenance_builder_id": "https://github.com/gzuuus/enclava-canary/actions/runs/38550489896/attempts/1"
+ },
+ "target": {
+  "application_ids": [
+   "1b811357-6fa7-827a-abaa-5c53b4dc0e2b"
+  ],
+  "attestation_proxy_digests": [
+   "sha256:776ab104be7479f6b2795a5e60a4bee4c1ff199a80717d0e21e6de94c4f64ab9"
+  ],
+  "caddy_digests": [
+   "sha256:3993a63019034e21bf41d60ccaf9b8264401b0eeb26f5e0e063f8b63e3bef725"
+  ],
+  "image_digests": [
+   "sha256:9a296e6475035b40abdf3d062ff3c8c3706c2f1a965b6b9e1fe27828a8d53f60"
+  ],
+  "organization_ids": [
+   "9c067648-4b45-4a48-9504-801a14729d0d"
+  ],
+  "origins": [
+   "https://canary-r14.5c7c00c7.dev.enclava.work"
+  ],
+  "platform_release_versions": [
+   "dev-2026.10.01-apxy.1"
+  ],
+  "runtime_classes": [
+   "kata-qemu-snp"
+  ]
+ },
+ "transport": {
+  "require_tls_channel_spki": false
+ },
+ "trusted_org_keyring_sha256": [
+  "8f649105aadf4e9808bad7b0ff70389ad9907dd8bca1af33411e0179f94d2a47"
+ ],
+ "trusted_policy_signing_pubkeys": [
+  "8e8c2d06c66cd21be5069fad1978800b8202ad846877ec3ff023c8cb803448b2"
+ ]
 }

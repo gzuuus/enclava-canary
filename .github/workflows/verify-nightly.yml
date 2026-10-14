@@ -20,10 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Pinned to the last public rev before the org-signing-key custody wave —
-      # matches the canary's platform. Bump deliberately.
+      # Pinned deliberately to the cap rev the trust-policy anchors were validated
+      # against (post-7f354bcb platform-release root). Bump together with any repin.
       - name: Install enclava CLI (pinned rev)
-        run: cargo install --git https://github.com/enclava-labs/cap --rev 5d17ebc0b9aa6ca252b39400f50a448061fc7c00 enclava-cli --locked
+        run: cargo install --git https://github.com/enclava-labs/cap --rev 9d86d59f22b44e702c5e8997cf7c73e22f475d9e enclava-cli --locked
 
       - name: Verify live canary (proof bundle + policy appraisal)
-        run: enclava verify https://e2e-drill.e62d05ff.enclava.dev --policy trust-policy.json
+        run: enclava verify https://canary-r14.5c7c00c7.dev.enclava.work --policy trust-policy.json
