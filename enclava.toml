@@ -1,5 +1,5 @@
 [app]
-name = "e2e-drill"
+name = "canary-r14"
 port = 8080
 command = ["python3", "/app/server.py"]
 
