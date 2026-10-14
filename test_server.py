@@ -4,6 +4,8 @@ schema (the nightly asserts these fields), and the HTTP contract."""
 from __future__ import annotations
 
 import base64
+import contextlib
+import io
 import json
 import threading
 import unittest
@@ -12,6 +14,7 @@ import urllib.request
 from http.server import ThreadingHTTPServer
 
 import server
+import guest_report
 
 VALID_NONCE = base64.urlsafe_b64encode(b"x" * server.REPORT_NONCE_BYTES).decode().rstrip("=")
 
@@ -45,6 +48,8 @@ class SchemaPin(unittest.TestCase):
             {"nonce", "generated_at", "vantage", "uname", "init_ready", "mounts",
              "block_devices", "mapper_devices", "sev", "sidecar"},
         )
+        # Two-sided pin: the client's field contract matches the server's.
+        self.assertEqual(set(payload), guest_report.REPORT_FIELDS)
         self.assertEqual(payload["nonce"], VALID_NONCE)
         self.assertEqual(payload["vantage"], "workload-container")
         self.assertEqual(set(payload["uname"]), {"sys", "release", "machine"})
@@ -101,6 +106,36 @@ class Route(unittest.TestCase):
     def test_unknown_path_still_404s(self):
         status, _, _ = self.get("/guest-report-evil")
         self.assertEqual(status, 404)
+
+
+class Helper(unittest.TestCase):
+    """The nightly assertion shape: guest_report.py against a live route."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.httpd = ThreadingHTTPServer(("127.0.0.1", 0), server.H)
+        cls.origin = f"http://127.0.0.1:{cls.httpd.server_address[1]}"
+        threading.Thread(target=cls.httpd.serve_forever, daemon=True).start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.httpd.shutdown()
+
+    def test_passes_on_matching_assertions(self):
+        body, checks = guest_report.fetch_report(self.origin)
+        self.assertIsNotNone(body)
+        self.assertTrue(all(c["ok"] for c in checks), checks)
+
+    def run_main(self, argv):
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            return guest_report.main(argv)
+
+    def test_fails_on_wrong_assertion(self):
+        self.assertEqual(self.run_main([self.origin, "--assert", "vantage=host-container"]), 1)
+
+    def test_passes_on_true_assertion(self):
+        self.assertEqual(self.run_main([self.origin, "--assert", "uname.sys=Linux"]), 0)
 
 
 if __name__ == "__main__":
