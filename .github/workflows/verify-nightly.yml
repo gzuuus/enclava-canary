@@ -25,5 +25,14 @@ jobs:
       - name: Install enclava CLI (pinned rev)
         run: cargo install --git https://github.com/enclava-labs/cap --rev 9d86d59f22b44e702c5e8997cf7c73e22f475d9e enclava-cli --locked
 
+      # Tenant workload TLS issues from the Let's Encrypt *staging* directory
+      # since the 2026-11-05 flip, so fresh/renewed canary certs chain to the
+      # staging roots (YE for ECDSA accounts, YR for RSA), which are not in
+      # public trust stores. Pinned here as public trust anchors.
+      - name: Trust the Let's Encrypt staging roots
+        run: |
+          sudo cp certs/le-staging-roots.pem /usr/local/share/ca-certificates/le-staging-roots.crt
+          sudo update-ca-certificates
+
       - name: Verify live canary (proof bundle + policy appraisal)
         run: enclava verify https://canary-r14.5c7c00c7.dev.enclava.work --policy trust-policy.json
