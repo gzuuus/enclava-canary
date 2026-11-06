@@ -35,4 +35,4 @@ jobs:
           sudo update-ca-certificates
 
       - name: Verify live canary (proof bundle + policy appraisal)
-        run: enclava verify https://canary-r14.5c7c00c7.dev.enclava.work --policy trust-policy.json
+        run: enclava verify https://canary-r14.ee646299.dev.enclava.work --policy trust-policy.json
