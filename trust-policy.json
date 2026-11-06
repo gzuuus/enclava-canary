@@ -67,7 +67,7 @@
   },
   "target": {
     "application_ids": [
-      "e095e4c9-89a3-8187-84fc-b94ed12b5060"
+      "31c7e1dd-f7fe-8d48-bb29-a8793ca09e64"
     ],
     "attestation_proxy_digests": [
       "sha256:6c43310ec0abcede1b0c4678d05983b28f2210b0d139d9f0e68a85f1ce44ff48"
@@ -79,10 +79,10 @@
       "sha256:9a296e6475035b40abdf3d062ff3c8c3706c2f1a965b6b9e1fe27828a8d53f60"
     ],
     "organization_ids": [
-      "286241a9-b440-4144-a13f-9f887521a015"
+      "6d7f5091-8981-4ffb-a6ca-4e07d303e679"
     ],
     "origins": [
-      "https://canary-r14.ee646299.dev.enclava.work"
+      "https://canary-r14.ea1f55fc.dev.enclava.work"
     ],
     "platform_release_versions": [
       "shared-policy-v1.1-2026.11.04.1"
@@ -95,7 +95,7 @@
     "require_tls_channel_spki": false
   },
   "trusted_org_keyring_sha256": [
-    "653f06feaeda1f5eef5f877cb415ba4a04b10c01abde07523664b36097c1716c"
+    "d69c508850d9754a672eacffcafd3df1a84b16cecc2f587d0c99aa422db3f600"
   ],
   "trusted_policy_signing_pubkeys": [
     "8e8c2d06c66cd21be5069fad1978800b8202ad846877ec3ff023c8cb803448b2"
